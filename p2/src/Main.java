@@ -133,44 +133,6 @@ public class Main extends TurtleMode {
 	}
 	
 	
-	/*
-	static class Scene implements Drawable {
-		List<Drawable> list;
-		
-		private Scene(Builder sb) {
-			this.list = sb.list;
-		}
-
-		@Override
-		public void draw() {
-			for(Drawable d : list)
-				d.draw();
-		}
-
-		public static class Builder {
-			List<Drawable> list;
-
-
-			public Builder() {
-				list = new LinkedList<>();
-			}
-
-			public Builder withHouse(int x, int y, int width, int levelCount, int windowCount) {
-				int height = levelCount * 10;
-				list.add(new House(x, y, width, height));
-				return this;
-			}
-			
-			public Builder withTree(int x, int y, int width, int height) {
-				list.add(new Tree(x, y, width, height));
-				return this;
-			}
-
-			public Scene build() {
-				return new Scene(this);
-			}
-		}
-	}*/
 	
 	public void drawLine(int x, int y, int length, int angle){
 		up();
