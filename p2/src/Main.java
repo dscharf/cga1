@@ -45,9 +45,7 @@ public class Main extends TurtleMode {
 			d.draw();
 	}
 
-	interface Drawable {
-		void draw();
-	}
+	
 	
 	class House implements Drawable {
 		int x, y, width, height, windowCount, levelCount;
