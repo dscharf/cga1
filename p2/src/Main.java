@@ -19,30 +19,26 @@ public class Main extends TurtleMode {
 
 	@Override
 	public void turtleCommands() {
-		
-
 		List<Drawable> list = new LinkedList<>();
-		
 		
 		Random r = new Random();
 		int x = 100;
 		for(int i = 0; i < 5; i++){
 			int w = 70 + r.nextInt(70);
-			list.add(new House(x, 300, w, 1 + r.nextInt(5), 2 + r.nextInt(10)));
+			list.add(new House(x, 400, w, 1 + r.nextInt(5), 4 + r.nextInt(10)));
 			x += w + 10;
 		}
 		
-		x = 200;
+		x = 80;
 		for(int i = 0; i < 4; i++){
-			int rootHeight = 30 + r.nextInt(40);
-			int alpha = 10 + r.nextInt(60);
+			int rootHeight = 50 + r.nextInt(40);
+			int alpha = 40 + r.nextInt(20);
 			int beta = 10 + r.nextInt(60);
 			int depth = 10;
-			double shrinkRate = 0.6 + r.nextDouble() * 0.2;
+			double shrinkRate = 0.55 + r.nextDouble() * 0.2;
 			
-			int w = 120 + r.nextInt(70);
-			list.add(new Tree(x, 500, rootHeight, alpha, beta, 8, shrinkRate));
-			x += w;
+			list.add(new Tree(x, 490 + r.nextInt(20), rootHeight, alpha, beta, 8, shrinkRate));
+			x += 200 + r.nextInt(20);
 		}
 
 		for(Drawable d : list)
@@ -67,14 +63,12 @@ public class Main extends TurtleMode {
 
 		public void draw() {
 			drawRectangle(x, y, width, height);
-			
-			
-			int doorWidth = (int) (width * 0.2);
-			int doorHeight = (int) (LEVEL_HEIGHT * 0.8);
-			drawRectangle(x + (width - doorWidth) / 2, y, doorWidth, doorHeight);
-			
+			drawTriangle(x, y - height, width);
+		
 			int columnCount = windowCount / levelCount;
 			if(windowCount % levelCount > 0)
+				columnCount++;
+			if(columnCount % 2 == 0)
 				columnCount++;
 			
 			int rasterWidth = width / columnCount;
@@ -83,20 +77,30 @@ public class Main extends TurtleMode {
 			
 			int windowOffsetX = (int) Math.round((rasterWidth - windowWidth) / 2.0);
 			int windowOffsetY = (int) Math.round((LEVEL_HEIGHT - windowHeight) / 2.0);
-					System.out.println(levelCount  + " " + columnCount);
+			//System.out.printf("count: %s, rows: %s, column: %s\n", windowCount, levelCount, columnCount);
 			
-			for(int i = 0; i < windowCount; i++) {
-				int xtmp = (i % (columnCount) ) * rasterWidth + windowOffsetX;
-				int ytmp = (i / levelCount ) * LEVEL_HEIGHT + windowOffsetY;
+			int c = windowCount;
+			for(int i = 0; i < columnCount * levelCount; i++) {
+				int xtmp = (i % columnCount) * rasterWidth + windowOffsetX;
+				int ytmp = (i / columnCount) * LEVEL_HEIGHT + windowOffsetY;
+
+				if(i != Math.floor(columnCount / 2.0))
 				drawRectangle(x + xtmp, y - ytmp, windowWidth, windowHeight);
 				
-				if(i % columnCount == 0)
-					System.out.println();
-				System.out.print(i % columnCount);
+				if(c-- == 0)
+					break;
+			}
+			if(c == 0){
+				int xtmp = (int) Math.floor(columnCount / 2.0)  * rasterWidth + windowOffsetX;
+				int ytmp = levelCount * LEVEL_HEIGHT + windowOffsetY;
+				drawRectangle(x + xtmp, y - ytmp, windowWidth, windowHeight);
 				
 			}
 			
-			drawTriangle(x, y - height, width);
+			int doorWidth = (int) (rasterWidth * 0.8);
+			int doorHeight = (int) (LEVEL_HEIGHT * 0.8);
+			drawRectangle(x + (width - doorWidth) / 2, y, doorWidth, doorHeight);
+			
 		}
 	}
 
