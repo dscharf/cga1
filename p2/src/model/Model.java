@@ -1,3 +1,4 @@
+package model;
 
 public abstract class Model {
 	final protected ModelContext context;

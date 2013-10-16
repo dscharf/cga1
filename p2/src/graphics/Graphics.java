@@ -1,3 +1,4 @@
+package graphics;
 public interface Graphics {
 	void glUp();
 

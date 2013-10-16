@@ -1,6 +1,13 @@
+import graphics.Drawable;
+import graphics.Graphics;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+
+import model.HouseModel;
+import model.ModelContext;
+import model.TreeModel;
 
 import org.amcgala.TurtleMode;
 

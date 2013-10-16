@@ -1,3 +1,7 @@
+package model;
+import graphics.Drawable;
+import graphics.Graphics;
+
 public class HouseModel extends Model implements Drawable {
 	int x, y, width, height, windowCount, levelCount;
 	

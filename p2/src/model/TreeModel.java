@@ -1,3 +1,7 @@
+package model;
+import graphics.Drawable;
+import graphics.Graphics;
+
 public class TreeModel extends Model implements Drawable {
 	int x, y, height, alpha, beta, depth;
 	double shrinkRate;
