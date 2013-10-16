@@ -16,12 +16,6 @@ public class Main extends TurtleMode {
 		new Main();
 	}
 	
-	
-	public void commitFunction(boolean justForTheCommit){
-		System.out.println("Meanwhile at develop");
-		return;
-	}
-	
 
 	@Override
 	public void turtleCommands() {
@@ -57,10 +51,6 @@ public class Main extends TurtleMode {
 
 	interface Drawable {
 		void draw();
-	}
-	
-	private void useLessFunction(){
-		System.out.println("USELESS FUNCTION");
 	}
 	
 	class House implements Drawable {
