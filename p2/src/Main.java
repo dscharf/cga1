@@ -59,7 +59,7 @@ public class Main extends TurtleMode {
 	}
 	
 	private void useLessFunction(){
-		
+		System.out.println("USELESS FUNCTION");
 	}
 	
 	class House implements Drawable {
