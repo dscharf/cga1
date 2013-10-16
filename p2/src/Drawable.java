@@ -1,3 +1,3 @@
 public interface Drawable {
-	void draw();
+	void draw(Graphics g);
 }
