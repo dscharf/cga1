@@ -59,6 +59,10 @@ public class Main extends TurtleMode {
 		void draw();
 	}
 	
+	private void useLessFunction(){
+		System.out.println("USELESS FUNCTION");
+	}
+	
 	class House implements Drawable {
 		int x, y, width, height, windowCount, levelCount;
 		
