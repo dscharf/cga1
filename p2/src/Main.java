@@ -58,6 +58,10 @@ public class Main extends TurtleMode {
 		void draw();
 	}
 	
+	private void useLessFunction(){
+		
+	}
+	
 	class House implements Drawable {
 		int x, y, width, height, windowCount, levelCount;
 		
