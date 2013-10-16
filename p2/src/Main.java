@@ -94,37 +94,89 @@ public class Main extends TurtleMode {
 			this.x = x;
 			this.y = y;
 			this.height = height;
-			this.alpha = alpha;
+			this.alpha = 45;
 			this.beta = beta;
 			this.depth = depth;
 		}
 
 		@Override
 		public void draw() {
-			
+			int angle = 45;
+			int length = height;
 
 			drawLine(x, y, height, 90);
-			fractal(x, y - height, height, 90, 0);
+			//fractal(x, y - height, height, 90, 0);
+			
+			turtleFractalInit(x, y - height, height, 90, 0.7);
+		
+		}
+		
+		private void turtleFractalInit(int x, int y, int length, int direction, double shrinkRate){
+			
+			up();
+			
+			move(x0 + x);
+			turnRight(90);
+			move(y0 + y);
+			down();
+			
+
+			turnLeft(90);
+			turnLeft(direction);
+			turtleFractalRec(length, shrinkRate, 0, false);
+			turnRight(direction);
+			up();
+			
+			turnRight(90);
+			turnLeft(90);
+			move(x0 + x);
+			turnRight(90);
+			move(y0 + y);
+			turnRight(90);
+		}
+		
+		private void turtleFractalRec(int length, double shrinkRate, int level, boolean isRight){
+			if(level == depth){
+				//up();
+				turnRight(180);
+			} else {
+				turnLeft(alpha);
+				move(length *= shrinkRate);
+				turtleFractalRec(length, shrinkRate, ++level, false);
+				move(length);
+				
+				turnLeft(180 - alpha * 2);
+				move(length);
+
+				turtleFractalRec(length, shrinkRate, level, true);
+				move(length);
+				turnLeft(alpha);
+			} 
 		}
 		
 		private void fractal(int x, int y, int length, int gamma, int level){
 			if(level >= depth)
 				return;
 			else {
+
+				drawRectangle(x - 1, y + 1, 2, 2);
+				
 				level++;
-				int a = alpha + gamma;
-				int b = 360 - alpha + gamma;
-				int l = (int) (length * 0.7);
-				drawLine(x, y, l,  a);
-				drawLine(x, y, l,  b);
+				length *= 0.7;
+				x += (int) Math.floor(length * Math.cos(gamma)  );
+				y -= (int) Math.floor(length * Math.sin(gamma)  * 0.75);
 				
 				
-				int tmp = (int) Math.round(Math.sqrt(l * l / 2));
-				int tmpX = (int) Math.round(l * Math.cos(gamma));
-				int tmpY = (int) Math.round(l * Math.sin(gamma));
-				fractal(x + tmpX,//(int) Math.round(l * Math.atan(alpha)), 
-						y - tmpY, //(int) Math.round(l * Math.acos(alpha)), 
-						l, a, ++level);
+				int gammaA = 45 + gamma;
+				int gammaB = 360 - alpha + gamma;
+				drawRectangle(x - 1, y + 1, 2, 2);
+				drawLine(x, y, length,  180 + gammaA);
+				//drawLine(x, y, length,  180  b);
+				
+
+				
+				
+				fractal(x, y, length, gammaA, level);
 				
 				
 			}
