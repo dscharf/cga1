@@ -18,6 +18,7 @@ public class Main extends TurtleMode {
 	
 	
 	public void commitFunction(boolean justForTheCommit){
+		System.out.println("Meanwhile at develop");
 		return;
 	}
 	
