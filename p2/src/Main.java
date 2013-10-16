@@ -22,8 +22,7 @@ public class Main extends TurtleMode {
 
 		List<Drawable> list = new LinkedList<>();
 		
-		list.add(new Tree(300, 500, 54, 55, 25, 8, 0.75));
-
+		
 		Random r = new Random();
 		int x = 100;
 		for(int i = 0; i < 5; i++){
@@ -32,6 +31,18 @@ public class Main extends TurtleMode {
 			x += w + 10;
 		}
 		
+		x = 200;
+		for(int i = 0; i < 4; i++){
+			int rootHeight = 30 + r.nextInt(40);
+			int alpha = 10 + r.nextInt(60);
+			int beta = 10 + r.nextInt(60);
+			int depth = 10;
+			double shrinkRate = 0.6 + r.nextDouble() * 0.2;
+			
+			int w = 120 + r.nextInt(70);
+			list.add(new Tree(x, 500, rootHeight, alpha, beta, 8, shrinkRate));
+			x += w;
+		}
 
 		for(Drawable d : list)
 			d.draw();
