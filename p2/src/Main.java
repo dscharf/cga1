@@ -15,6 +15,12 @@ public class Main extends TurtleMode {
 	public static void main(String[] args) {
 		new Main();
 	}
+	
+	
+	public void commitFunction(boolean justForTheCommit){
+		return;
+	}
+	
 
 	@Override
 	public void turtleCommands() {
