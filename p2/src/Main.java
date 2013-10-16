@@ -120,8 +120,8 @@ public class Main extends TurtleMode {
 				
 				
 				int tmp = (int) Math.round(Math.sqrt(l * l / 2));
-				int tmpX = tmp;
-				int tmpY = tmp;
+				int tmpX = (int) Math.round(l * Math.cos(gamma));
+				int tmpY = (int) Math.round(l * Math.sin(gamma));
 				fractal(x + tmpX,//(int) Math.round(l * Math.atan(alpha)), 
 						y - tmpY, //(int) Math.round(l * Math.acos(alpha)), 
 						l, a, ++level);
