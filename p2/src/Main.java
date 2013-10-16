@@ -22,7 +22,7 @@ public class Main extends TurtleMode {
 
 		List<Drawable> list = new LinkedList<>();
 		
-		list.add(new Tree(300, 500, 50, 45, 45, 5));
+		list.add(new Tree(300, 500, 54, 55, 25, 8, 0.75));
 
 		Random r = new Random();
 		int x = 100;
@@ -90,29 +90,25 @@ public class Main extends TurtleMode {
 
 	class Tree implements Drawable {
 		int x, y, height, alpha, beta, depth;
-		public Tree(int x, int y, int height, int alpha, int beta, int depth) {
+		double shrinkRate; 
+		
+		public Tree(int x, int y, int rootHeight, int alpha, int beta, int depth, double shrinkRate) {
 			this.x = x;
 			this.y = y;
-			this.height = height;
-			this.alpha = 45;
+			this.height = rootHeight;
+			this.alpha = alpha;
 			this.beta = beta;
 			this.depth = depth;
+			this.shrinkRate = shrinkRate;
 		}
 
 		@Override
 		public void draw() {
-			int angle = 45;
-			int length = height;
-
-			drawLine(x, y, height, 90);
-			//fractal(x, y - height, height, 90, 0);
-			
-			turtleFractalInit(x, y - height, height, 90, 0.7);
-		
+			drawLine(x, y, height, 90);			
+			turtleFractalInit(x, y - height, 90);
 		}
 		
-		private void turtleFractalInit(int x, int y, int length, int direction, double shrinkRate){
-			
+		private void turtleFractalInit(int x, int y, int direction){
 			up();
 			
 			move(x0 + x);
@@ -120,10 +116,9 @@ public class Main extends TurtleMode {
 			move(y0 + y);
 			down();
 			
-
 			turnLeft(90);
 			turnLeft(direction);
-			turtleFractalRec(length, shrinkRate, 0, false);
+			turtleFractalRec(height, 0);
 			turnRight(direction);
 			up();
 			
@@ -135,53 +130,25 @@ public class Main extends TurtleMode {
 			turnRight(90);
 		}
 		
-		private void turtleFractalRec(int length, double shrinkRate, int level, boolean isRight){
-			if(level == depth){
-				//up();
+		private void turtleFractalRec(int length, int level){
+			length *= shrinkRate;
+			if(level == depth || length < 1){
 				turnRight(180);
 			} else {
 				turnLeft(alpha);
-				move(length *= shrinkRate);
-				turtleFractalRec(length, shrinkRate, ++level, false);
 				move(length);
 				
-				turnLeft(180 - alpha * 2);
+				turtleFractalRec(length, ++level);
+				move(length);
+				
+				turnLeft(180 - alpha - beta);
 				move(length);
 
-				turtleFractalRec(length, shrinkRate, level, true);
+				turtleFractalRec(length, level);
 				move(length);
-				turnLeft(alpha);
+				turnLeft(beta);
 			} 
 		}
-		
-		private void fractal(int x, int y, int length, int gamma, int level){
-			if(level >= depth)
-				return;
-			else {
-
-				drawRectangle(x - 1, y + 1, 2, 2);
-				
-				level++;
-				length *= 0.7;
-				x += (int) Math.floor(length * Math.cos(gamma)  );
-				y -= (int) Math.floor(length * Math.sin(gamma)  * 0.75);
-				
-				
-				int gammaA = 45 + gamma;
-				int gammaB = 360 - alpha + gamma;
-				drawRectangle(x - 1, y + 1, 2, 2);
-				drawLine(x, y, length,  180 + gammaA);
-				//drawLine(x, y, length,  180  b);
-				
-
-				
-				
-				fractal(x, y, length, gammaA, level);
-				
-				
-			}
-		}
-
 	}
 	
 	
