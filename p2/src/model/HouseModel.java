@@ -32,9 +32,14 @@ public class HouseModel extends Model implements Drawable {
 		int windowWidth = (int) (rasterWidth * 0.5);
 		int windowHeight = (int) (LEVEL_HEIGHT * 0.5);
 		
+		
+		if(windowWidth > width * 0.25)
+			windowWidth = (int) Math.round(width * 0.25);
+		
 		int windowOffsetX = (int) Math.round((rasterWidth - windowWidth) / 2.0);
 		int windowOffsetY = (int) Math.round((LEVEL_HEIGHT - windowHeight) / 2.0);
 		//System.out.printf("count: %s, rows: %s, column: %s\n", windowCount, levelCount, columnCount);
+
 		
 		int c = windowCount;
 		for(int i = 0; i < columnCount * levelCount; i++) {
@@ -55,6 +60,9 @@ public class HouseModel extends Model implements Drawable {
 		}
 		
 		int doorWidth = (int) (rasterWidth * 0.8);
+		if(rasterWidth > width * 0.3)
+			doorWidth = (int) Math.round(width * 0.3);
+		
 		int doorHeight = (int) (LEVEL_HEIGHT * 0.8);
 		g.glDrawRectangle(x + (width - doorWidth) / 2, y, doorWidth, doorHeight);
 		

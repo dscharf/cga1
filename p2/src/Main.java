@@ -50,12 +50,16 @@ public class Main extends TurtleMode implements Graphics {
 		x = 80;
 		for(int i = 0; i < 4; i++){
 			int rootHeight = 50 + r.nextInt(40);
-			int alpha = 40 + r.nextInt(20);
-			int beta = 10 + r.nextInt(60);
+			int alpha = 10 + r.nextInt(70);
+			int beta = 10 + r.nextInt(70);
 			int depth = 5 + r.nextInt(10);
-			double shrinkRate = 0.55 + r.nextDouble() * 0.2;
-			
-			list.add(new TreeModel(context, x, 490 + r.nextInt(20), rootHeight, alpha, beta, depth, shrinkRate));
+			double alphaRate = 0.55 + r.nextDouble() * 0.2;
+			double betaRate = 0.45 + r.nextDouble() * 0.4;
+			beta = 25;
+			alpha = 20;
+			depth = 20;
+			list.add(new TreeModel(context, x, 490 + r.nextInt(20), rootHeight, 
+					depth, alpha, beta, alphaRate, betaRate));
 			x += 200 + r.nextInt(20);
 		}
 

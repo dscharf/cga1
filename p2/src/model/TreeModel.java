@@ -4,10 +4,10 @@ import graphics.Graphics;
 
 public class TreeModel extends Model implements Drawable {
 	int x, y, height, alpha, beta, depth;
-	double shrinkRate;
+	double alphaRate, betaRate;
 
-	public TreeModel(ModelContext con, int x, int y, int rootHeight, int alpha,
-			int beta, int depth, double shrinkRate) {
+	public TreeModel(ModelContext con, int x, int y, int rootHeight, int depth, int alpha,
+			int beta, double alphaRate, double betaRate) {
 		super(con);
 		this.x = x;
 		this.y = y;
@@ -15,7 +15,8 @@ public class TreeModel extends Model implements Drawable {
 		this.alpha = alpha;
 		this.beta = beta;
 		this.depth = depth;
-		this.shrinkRate = shrinkRate;
+		this.alphaRate = alphaRate;
+		this.betaRate = betaRate;
 	}
 
 	@Override
@@ -47,21 +48,22 @@ public class TreeModel extends Model implements Drawable {
 	}
 
 	private void turtleFractalRec(Graphics g, int length, int level) {
-		length *= shrinkRate;
-		if (level == depth || length < 1) {
+		int alphaLength = (int) (length * alphaRate);
+		int betaLength = (int) (length * betaRate);
+		if (level == depth || alphaLength < 1 || betaLength < 1) {
 			g.glTurnRight(180);
 		} else {
 			g.glTurnLeft(alpha);
-			g.glMove(length);
+			g.glMove(alphaLength);
 
-			turtleFractalRec(g, length, ++level);
-			g.glMove(length);
+			turtleFractalRec(g, alphaLength, ++level);
+			g.glMove(alphaLength);
 
 			g.glTurnLeft(180 - alpha - beta);
-			g.glMove(length);
+			g.glMove(betaLength);
 
-			turtleFractalRec(g, length, level);
-			g.glMove(length);
+			turtleFractalRec(g, betaLength, level);
+			g.glMove(betaLength);
 			g.glTurnLeft(beta);
 		}
 	}
