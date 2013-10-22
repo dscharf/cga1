@@ -139,25 +139,25 @@ public class LindenmayerSystem {
     private String applyRules() {
         String current = axiom.getAxiom();
 
-        System.err.println(current);
+        //System.err.println(current);
         
-        for (int i = 1; i < level.level; i++) {
+        for (int i = 0; i < level.level; i++) {
             String temp = "";
             for (char c : current.toCharArray()) {
                 temp += rules.applyReplacementRules(Character.toString(c));
             }
             current = temp;
-            System.err.println(current);
+           // System.err.println(current);
         }
         
-        System.err.println(current);
+        //System.err.println(current);
 
         String temp = "";
         for (char c : current.toCharArray()) {
             temp += rules.applyDrawingRules(Character.toString(c));
         }
         
-        System.err.println(temp);
+        //System.err.println(temp);
 
         current = temp;
         return current;

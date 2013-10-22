@@ -21,7 +21,8 @@ public class Main extends Amcgala{
                 new Axiom("X"),
                 new Rules()
                         .addReplacementRule("F", "FF")
-                        .addReplacementRule("X", "F[-[X]+X]+F[+FX]-X")
+                        //.addReplacementRule("X", "F[-[X]+X]+F[+FX]-X")
+                        .addReplacementRule("X", "F[X][-X]F[+FX]-[X]")
                         .addDrawingRule("F", "M")
                         .addDrawingRule("X", ""),
                 new Level(6),
@@ -58,6 +59,10 @@ public class Main extends Amcgala{
 
         lindenmayerSystem2.run();
         scene.addShape(shape2);
+        
+        
+      
+        
         framework.addScene(scene);
     }
 
